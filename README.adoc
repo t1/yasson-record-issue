@@ -1,0 +1,8 @@
+= Reproducer for an Issue with Yasson and Records
+
+This project is a minimalistic reproducer for an https://github.com/eclipse-ee4j/yasson/issues/607[issue with Yasson and Records].
+
+The project builds just fine if you run as it is.
+However, if you change the `@Order(1)` annotation in line 24 of the `JsonBindingTest` class to `@Order(3)`, then both tests fail!
+It looks like Yasson doesn't pick up the `ProductId.JsonAdapter` anymore.
+So instead of `"42"` / `["42","43"]`, it produces `{"value":"42"}` / `[{"value":"42"},{"value":"43"}]`.
